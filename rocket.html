@@ -31,11 +31,18 @@
       this.image.src = "images/spaceship.png";
 
       this.draw = function() {
-        context.drawImage(this.image, this.xpos, this.ypos);
+        context.drawImage(this.image, this.xpos, this.ypos, width, height);
       }
 
       this.tick = function() {
+        if (this.xpos > canvas.width || this.xpos < 0) {
+          this.speedx = -this.speedx;
+        }
+        if (this.ypos > canvas.height || this.ypos < 0) {
+          this.speedy = -this.speedy;
+        }
         this.xpos += this.speedx;
+        this.ypos += this.speedy;
       }
 
     };
