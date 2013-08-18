@@ -1,0 +1,54 @@
+<!doctype html>
+<head>
+  <script language="javascript">
+    var context;
+    var canvas;
+    var spaceship;
+
+    function init() {
+      console.log("init");
+      canvas = document.getElementById('spaceship');
+      canvas.width = screen.availWidth;
+      canvas.height = screen.availHeight;
+      context = canvas.getContext('2d');
+      this.spaceship = new Spaceship(90, 100, 40, 60);
+    }
+
+    function redraw() {
+      console.log("redraw");
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      spaceship.tick();
+      spaceship.draw();
+    }
+
+    function Spaceship(width, height, xpos,ypos) {
+      console.log("spaceship");
+      this.xpos = xpos;
+      this.ypos = ypos;
+      this.speedx = 6;
+      this.speedy = 7;
+      this.image = new Image;
+      this.image.src = "images/spaceship.png";
+
+      this.draw = function() {
+        context.drawImage(this.image, this.xpos, this.ypos);
+      }
+
+      this.tick = function() {
+        this.xpos += this.speedx;
+      }
+
+    };
+
+    window.onload = function() {
+      init();
+      redraw();
+      setInterval(redraw, 20);
+    };
+  </script>
+</head>
+
+<body>
+<canvas id="spaceship"> </canvas>
+</body>
+</html>
